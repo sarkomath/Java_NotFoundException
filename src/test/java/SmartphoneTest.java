@@ -17,7 +17,6 @@ public class SmartphoneTest {
 
     @Test
     public void removeIfNotExist() {
-        int idToRemove = 88;
 
         Smartphone smartphone1 = new Smartphone(11, 111, "Phone111", "Fabric111");
         Smartphone smartphone2 = new Smartphone(22, 111, "Phone222", "Fabric111");
@@ -33,12 +32,11 @@ public class SmartphoneTest {
         manager.add(smartphone5);
         manager.add(smartphone6);
 
-        assertThrows(NotFoundException.class, () -> repository.removeById(idToRemove));
+        assertThrows(NotFoundException.class, () -> repository.removeById(88));
     }
 
     @Test
     public void removeIfExist() {
-        int idToRemove = 55;
 
         Smartphone smartphone1 = new Smartphone(11, 111, "Phone111", "Fabric111");
         Smartphone smartphone2 = new Smartphone(22, 111, "Phone222", "Fabric111");
@@ -54,8 +52,10 @@ public class SmartphoneTest {
         manager.add(smartphone5);
         manager.add(smartphone6);
 
-        repository.removeById(idToRemove);
+        repository.removeById(55);
 
-        assertThrows(NotFoundException.class, () -> repository.removeById(idToRemove));
+        Product[] actual = repository.findAll();
+        Product[] expected = {smartphone1,smartphone2, smartphone3, smartphone4, smartphone6};
+
     }
 }

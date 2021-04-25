@@ -15,7 +15,6 @@ public class BookTest {
 
     @Test
     public void removeIfNotExist() {
-        int idToRemove = 999;
 
         Book book1 = new Book(101, 111, "Book111", "Author1");
         Book book2 = new Book(202, 222, "Book222", "Author2");
@@ -35,12 +34,11 @@ public class BookTest {
         manager.add(book7);
         manager.add(book8);
 
-        assertThrows(NotFoundException.class, () -> repository.removeById(idToRemove));
+        assertThrows(NotFoundException.class, () -> repository.removeById(999));
     }
 
     @Test
     public void removeIfExist() {
-        int idToRemove = 707;
 
         Book book1 = new Book(101, 111, "Book111", "Author1");
         Book book2 = new Book(202, 222, "Book222", "Author2");
@@ -60,8 +58,9 @@ public class BookTest {
         manager.add(book7);
         manager.add(book8);
 
-        repository.removeById(idToRemove);
+        repository.removeById(707);
 
-        assertThrows(NotFoundException.class, () -> repository.removeById(idToRemove));
+        Product[] actual = repository.findAll();
+        Product[] expected = {book1, book2, book3, book4, book5, book6, book8};
     }
 }
